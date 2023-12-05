@@ -9,9 +9,9 @@ Setup
 Clone the Repository: Clone this repository to your local machine.
 Install Dependencies: Make sure you have Java and Spring Boot installed.
 Database Setup: This application requires a SQL database. Configure the application.properties file with your database details.
-'''docker run --name mydb -e MYSQL_ROOT_PASSWORD=pw -p 3306:3306 -d mysql:5.7.44'''
+`docker run --name mydb -e MYSQL_ROOT_PASSWORD=pw -p 3306:3306 -d mysql:5.7.44`
 in DB do 
-'''CREATE DATABASE mydb;'''
+`CREATE DATABASE mydb;`
 
 in application properties set spring.datasource.password to pw
 Run the Application: Execute the Spring Boot application. It will be available at http://localhost:8080.
@@ -20,12 +20,12 @@ This application includes the following endpoints that demonstrate SQL injection
 
 Safe Endpoint:
 
-URL: http://localhost:8080/users/testSafe/' OR '1'='1
+URL: `http://localhost:8080/users/testSafe/' OR '1'='1`
 Description: This endpoint simulates a "safe" query, which, despite its name, is vulnerable to SQL injection. It provides a real-time example of how SQL injection can be exploited.
 
 Unsafe Endpoint:
 
-URL: http://localhost:8080/users/testWrong/' OR '1'='1
+URL: `http://localhost:8080/users/testWrong/' OR '1'='1`
 Description: This endpoint is an example of an incorrectly implemented query that is vulnerable to SQL injection. It shows the common mistakes that lead to these vulnerabilities.
 How to Use
 To test the vulnerabilities, you can use tools like curl, Postman, or your web browser.
