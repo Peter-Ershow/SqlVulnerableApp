@@ -19,20 +19,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Create a new user
     @PostMapping
     public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
         UserEntity savedUser = userService.addUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    // Get all users
     @GetMapping
     public List<UserEntity> getAllUsers() {
         return userService.findAllUsers();
     }
 
-    // Get a single user by ID
     @GetMapping("/{id}")
     public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
         return userService.findUserById(id)
@@ -43,12 +40,11 @@ public class UserController {
     public ResponseEntity<List<UserEntity>> getUsersByNameSafe(@PathVariable String name) {
         return ResponseEntity.ok(userService.getUsersByNameSafe(name));
     }
-    @GetMapping("/testWrong/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<List<UserEntity>> getUsersByNameUnsafe(@PathVariable String name) {
         return ResponseEntity.ok(userService.getUsersByNameUnsafe(name));
     }
 
-    // Update a user
     @PutMapping("/{id}")
     public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody UserEntity user) {
         return userService.updateUser(id, user)
@@ -56,7 +52,6 @@ public class UserController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // Delete a user
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         if (userService.deleteUser(id)) {
