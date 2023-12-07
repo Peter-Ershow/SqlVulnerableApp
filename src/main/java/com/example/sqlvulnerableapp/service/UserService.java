@@ -48,8 +48,8 @@ public class UserService {
         return userRepository.findUsersByNameSafe(name);
     }
 
-    public List<UserEntity> getUsersByNameUnsafe(String name) {
-        return userRepository.findUsersByNameUnsafe(name);
+    public String getEmail(String name) {
+        return userRepository.getEmail(name);
     }
 
 }

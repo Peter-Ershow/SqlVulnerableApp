@@ -30,21 +30,6 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
-        return userService.findUserById(id)
-                .map(ResponseEntity::ok)
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-    @GetMapping("/testSafe/{name}")
-    public ResponseEntity<List<UserEntity>> getUsersByNameSafe(@PathVariable String name) {
-        return ResponseEntity.ok(userService.getUsersByNameSafe(name));
-    }
-    @GetMapping("/{name}")
-    public ResponseEntity<List<UserEntity>> getUsersByNameUnsafe(@PathVariable String name) {
-        return ResponseEntity.ok(userService.getUsersByNameUnsafe(name));
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody UserEntity user) {
         return userService.updateUser(id, user)
@@ -58,5 +43,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    //safe queries
+
+    @GetMapping("/{name}/email")
+    public ResponseEntity<String> getUserEmailByNameSafe(@PathVariable String name) {
+        return ResponseEntity.ok(userService.getEmail(name));
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<List<UserEntity>> getUserByNameSafe(@PathVariable String name) {
+        return ResponseEntity.ok(userService.getUsersByNameSafe(name));
     }
 }

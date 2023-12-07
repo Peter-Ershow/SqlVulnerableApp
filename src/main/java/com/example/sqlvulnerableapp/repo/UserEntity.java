@@ -1,12 +1,10 @@
 package com.example.sqlvulnerableapp.repo;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "user_entity")
 public class UserEntity {
 
     @Id
@@ -31,6 +29,10 @@ public class UserEntity {
 
     private String name;
     private String email;
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
+    private Organization organization;
+
 
     public UserEntity(String name, String email) {
         this.name = name;

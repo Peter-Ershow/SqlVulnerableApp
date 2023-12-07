@@ -6,24 +6,22 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserRepositoryCustomImpl implements UserRepositoryCustom {
+public class OrganizationRepositoryCustomImpl implements OrganizationRepositoryCustom{
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<UserEntity> findUsersByNameSafe(String name) {
-        String jpql = "SELECT u FROM UserEntity u WHERE u.name = :name";
+    public List<UserEntity> findUsersByOrganizationNameUnsafe(String name) {
+        String jpql = "SELECT u FROM Organization o JOIN UserEntity u on u.organization = o WHERE o.name ='" + name + "'";
         TypedQuery<UserEntity> query = entityManager.createQuery(jpql, UserEntity.class);
-        query.setParameter("name", name);
         return query.getResultList();
     }
 
     @Override
-    public String getEmail(String name) {
-        String jpql = "SELECT u.email FROM UserEntity u WHERE u.name = :name";
+    public String findEmailByOrganizationNameUnsafe(String name) {
+        String jpql = "SELECT u.email FROM Organization o JOIN UserEntity u on u.organization = o WHERE o.name ='" + name + "'";
         TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
-        query.setParameter("name", name);
         return query.getResultStream().collect(Collectors.joining(", "));
     }
 }
