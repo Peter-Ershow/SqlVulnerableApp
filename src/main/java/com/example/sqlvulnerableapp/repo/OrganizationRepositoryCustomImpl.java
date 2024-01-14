@@ -19,9 +19,17 @@ public class OrganizationRepositoryCustomImpl implements OrganizationRepositoryC
     }
 
     @Override
-    public String findEmailByOrganizationNameUnsafe(String name) {
-        String jpql = "SELECT u.email FROM Organization o JOIN UserEntity u on u.organization = o WHERE o.name ='" + name + "'";
+    public String findEmailByOrganizationNameUnsafeForAI(String name) {
+        String jpql = "SELECT u.email FROM UserEntity u WHERE u.name ='" + name + "' and u.organization.id = 1";
         TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
+        return query.getResultStream().collect(Collectors.joining(", "));
+    }
+
+    @Override
+    public String findEmailByOrganizationNameSafeEngineering(String name) {
+        String jpql = "SELECT u.email FROM UserEntity u WHERE u.name = :name and u.organization.id = 2";
+        TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
+        query.setParameter("name", name);
         return query.getResultStream().collect(Collectors.joining(", "));
     }
 }

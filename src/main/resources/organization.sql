@@ -6,4 +6,4 @@ create table organization
 );
 
 INSERT INTO mydb.organization (id, name) VALUES (1, 'ai');
-INSERT INTO mydb.organization (id, name) VALUES (2, 'music');
+INSERT INTO mydb.organization (id, name) VALUES (2, 'engineering');

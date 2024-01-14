@@ -19,7 +19,11 @@ public class OrganizationService {
         return organizationRepository.findUsersByOrganizationNameUnsafe(name);
     }
 
-    public String getEmailsByNameUnsafe(String name) {
-        return organizationRepository.findEmailByOrganizationNameUnsafe(name);
+    public String getEmailsByNameUnsafeAI(String name) {
+        return organizationRepository.findEmailByOrganizationNameUnsafeForAI(name);
+    }
+
+    public String getEmailsByNameSafeEngineering(String name) {
+        return organizationRepository.findEmailByOrganizationNameSafeEngineering(name);
     }
 }

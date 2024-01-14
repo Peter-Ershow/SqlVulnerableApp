@@ -29,8 +29,13 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationService.getUsersByNameUnsafe(name));
     }
 
-    @GetMapping("/{name}/email")
-    public ResponseEntity<String> getEmailByOrganization(@PathVariable String name) {
-        return ResponseEntity.ok(organizationService.getEmailsByNameUnsafe(name));
+    @GetMapping("/ai/{name}")
+    public ResponseEntity<String> getEmailByOrganizationAI(@PathVariable String name) {
+        return ResponseEntity.ok(organizationService.getEmailsByNameUnsafeAI(name));
+    }
+
+    @GetMapping("/engineering/{name}")
+    public ResponseEntity<String> getEmailByOrganizationEngineering(@PathVariable String name) {
+        return ResponseEntity.ok(organizationService.getEmailsByNameSafeEngineering(name));
     }
 }
